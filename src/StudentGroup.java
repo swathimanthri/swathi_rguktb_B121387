@@ -157,28 +157,80 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void removeFromIndex(int index) {
+	public void removeFromIndex(int index)throws IllegalArgumentException {
 		// Add your implementation here
+		if(index<0||index>=students.length)
+		     throw new IllegalArgumentException();
+		    Student[] a=new Student[index+1];
+		    for(int i=0;i<index;i++)
+		        a[i]=students[i];
+		    students=a;
 	}
 
 	@Override
-	public void removeFromElement(Student student) {
+	public void removeFromElement(Student student)throws IllegalArgumentException {
 		// Add your implementation here
+		int index=-1;
+		if(student==null)
+		    throw new IllegalArgumentException();
+		int size=students.length;
+		for(int i=0;i<size;i++)
+		    if(students[i].equals(student))
+		          index=i;
+		    if(index!=-1)
+		   {
+		       removeFromIndex(index);
+		    }
+		    return;
 	}
 
 	@Override
-	public void removeToIndex(int index) {
+	public void removeToIndex(int index) throws IllegalArgumentException{
 		// Add your implementation here
+		 if(index<0||index>=this.students.length)
+			 throw new IllegalArgumentException();
+		else{
+			Student[] temp=new Student[this.students.length-index];
+			int n=this.students.length-index;
+			for(int i=0;i<n;i++)
+			{
+				temp[i]=this.students[index+i];
+			}
+			this.students=temp;
+		}
 	}
 
 	@Override
-	public void removeToElement(Student student) {
+	public void removeToElement(Student student)throws IllegalArgumentException {
 		// Add your implementation here
+		if(student==null)
+			 throw new IllegalArgumentException();
+		else{
+			ArrayList<Student> a=new ArrayList<Student>();
+			int n=this.students.length;
+			boolean flag=false;
+	   		for(int i=0;i<n;i++){
+	   			if(this.students[i].getId()==student.getId()&&this.students[i].getFullName().equals(student.getFullName())&&this.students[i].getBirthDate().compareTo(student.getBirthDate())==0&&this.students[i].getAvgMark()==student.getAvgMark())
+	   				flag=true;
+	   			if(flag)
+	   				a.add(this.students[i]);
+	   				}
+	   		this.students=a.toArray(new Student[a.size()]);
+   		}
 	}
 
 	@Override
 	public void bubbleSort() {
 		// Add your implementation here
+		for (int i=0; i<students.length; ++i) 
+			for (int j=0;j<students.length-i-1 ; ++j) 
+				if(students[j].compareTo(students[j+1])>0)
+				{
+					Student temp=students[j];
+					students[j]=students[j+1];
+					students[j+1]=temp;
+				}
+				return;
 	}
 
 	@Override
