@@ -67,7 +67,7 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void addFirst(Student student) {
+	public void addFirst(Student student) throws IllegalArgumentException {
 		// Add your implementation here
 		if(student==null)
 			throw new IllegalArgumentException();
@@ -82,13 +82,35 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void addLast(Student student) {
+	public void addLast(Student student) throws IllegalArgumentException{
 		// Add your implementation here
+		if(student==null)
+			throw new IllegalArgumentException();
+		else
+		{
+			Student[] temp=new Student[this.students.length+1];
+			for(int i=0;i<this.students.length;i++)
+				temp[i]=this.students[i];
+			temp[this.students.length]=student;
+			this.students=temp;
+		}
 	}
 
 	@Override
-	public void add(Student student, int index) {
+	public void add(Student student, int index)throws IllegalArgumentException {
 		// Add your implementation here
+		if(index<0||index>=this.students.length||student==null)
+				throw new IllegalArgumentException();
+			else
+			{
+				Student[] temp=new Student[this.students.length+1];
+				for(int i=0;i<index;i++)
+					temp[i]=this.students[i];
+				temp[index]=student;
+			          for(int i=index+1;i<=this.students.length;i++)
+			          	temp[i]=this.students[i-1];
+				this.students=temp;
+			}
 	}
 
 	@Override
